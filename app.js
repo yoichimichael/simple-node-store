@@ -11,13 +11,26 @@ const express = require('express');
 // app can be passed 
 const app = express();
 
+/*
+// example use of next()
 app.use((req, res, next) => {
   console.log('In the middleware!');
   next(); // allows request to continue to next middleware
 })
+*/
 
-app.use((req, res, next) => {
-  console.log('In another middleware!');
+app.use('/', (req, res, next) => {
+  console.log('This always runs!');
+  next();
+})
+
+app.use('/add-product', (req, res, next) => {
+  console.log('Im still in middleware!');
+  res.send('<h1>The Add Product Page</h1>')
+})
+
+app.use('/', (req, res, next) => {
+  console.log('I should not be running run!');
   res.send('<h1>Hello from Express.js!</h1>')// auto sets 'Content-Type: text/html; charset=utf-8' in headers
 })
 

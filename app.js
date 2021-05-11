@@ -11,6 +11,10 @@ const express = require('express');
 // app can be passed 
 const app = express();
 
+app.use((req, res, next) => {
+  console.log('In the middleware!');
+})
+
 const server = http.createServer(app);
 
 server.listen(3000);

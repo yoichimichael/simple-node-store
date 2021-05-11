@@ -1,9 +1,16 @@
+// core modules
 const http = require('http');
 
-const route = require('./routes');
+// 3rd party packages
 
-console.log(routes.someText);
+// variable 'express' is a top level function
+const express = require('express');
 
-const server = http.createServer(routes.handler);
+// variable 'app' can be named anything
+// express() returns a top level management object
+// app can be passed 
+const app = express();
+
+const server = http.createServer(app);
 
 server.listen(3000);

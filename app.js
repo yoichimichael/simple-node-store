@@ -1,5 +1,5 @@
 // core modules
-const http = require('http');
+// const http = require('http'); // not needed because Express calls on the module itself
 
 // 3rd party packages
 
@@ -13,8 +13,19 @@ const app = express();
 
 app.use((req, res, next) => {
   console.log('In the middleware!');
+  next(); // allows request to continue to next middleware
 })
 
-const server = http.createServer(app);
+app.use((req, res, next) => {
+  console.log('In another middleware!');
+  res.send('<h1>Hello from Express.js!</h1>')// auto sets 'Content-Type: text/html; charset=utf-8' in headers
+})
 
+/*
+// no longer need becuase of Express app methods
+const server = http.createServer(app);
 server.listen(3000);
+*/
+
+// instead of the above:
+app.listen(3000);

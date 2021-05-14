@@ -28,15 +28,6 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({extended: false}));
 
-app.get('/add-product', (req, res, next) => {
-  res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')
-})
-
-app.post('/product', (req, res, next) => {
-  console.log(req.body);
-  res.redirect('/');
-});
-
 app.use('/', (req, res, next) => {
   // console.log('I should not be running run!');
   res.send('<h1>Hello from Express.js!</h1>')// auto sets 'Content-Type: text/html; charset=utf-8' in headers

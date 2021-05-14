@@ -1,12 +1,16 @@
-// core modules
+// CORE MODULES
 // const http = require('http'); // not needed because Express calls on the module itself
 
-// 3rd party packages
+// 3RD PARTY PACKAGES
 
 // variable 'express' is a top level function
 const express = require('express');
 
 // const bodyParser = require('body-parser');
+
+// LOCAL IMPORTS
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
 // variable 'app' can be named anything
 // express() returns a top level management object
@@ -26,13 +30,13 @@ app.use((req, res, next) => {
 //   next();
 // })
 
+// parses ALL incoming request bodies
+// automatically calls next()
 app.use(express.urlencoded({extended: false}));
 
-app.use('/', (req, res, next) => {
-  // console.log('I should not be running run!');
-  res.send('<h1>Hello from Express.js!</h1>')// auto sets 'Content-Type: text/html; charset=utf-8' in headers
-})
-
+// first middleware with route specifi
+app.use(adminRoutes);
+app.use(shopRoutes);
 /*
 // no longer need becuase of Express app methods
 const server = http.createServer(app);

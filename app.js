@@ -34,10 +34,11 @@ app.use((req, res, next) => {
 // automatically calls next()
 app.use(express.urlencoded({extended: false}));
 
-// first middleware with route specifi
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
+
 app.use(shopRoutes);
 
+// ERROR HANDLER
 app.use((req, res, next) => {
   res.status(404).send('<h1>Page not found</h1>')
 });

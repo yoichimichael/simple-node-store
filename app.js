@@ -50,5 +50,7 @@ const server = http.createServer(app);
 server.listen(3000);
 */
 
+console.log({__dirname});
+
 // instead of the above:
 app.listen(3000);

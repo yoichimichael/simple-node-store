@@ -1,5 +1,6 @@
 // CORE MODULES
 // const http = require('http'); // not needed because Express calls on the module itself
+const path = require('path');
 
 // 3RD PARTY PACKAGES
 
@@ -40,7 +41,8 @@ app.use(shopRoutes);
 
 // ERROR HANDLER
 app.use((req, res, next) => {
-  res.status(404).send('<h1>Page not found</h1>')
+  // res.status(404).send('<h1>Page not found</h1>')
+  res.status(404).sendFile(path.join(__dirname, 'views/error.html'));
 });
 
 // CREATE AND START SERVER
@@ -49,8 +51,6 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 server.listen(3000);
 */
-
-console.log({__dirname});
 
 // instead of the above:
 app.listen(3000);

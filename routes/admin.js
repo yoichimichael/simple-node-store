@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 
 const rootDir = require('../helpers/path');
-console.log(require.main === module);
 
 const router = express.Router();
 

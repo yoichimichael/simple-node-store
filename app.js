@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 // parses ALL incoming request bodies
 // automatically calls next()
 app.use(express.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 

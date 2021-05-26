@@ -18,6 +18,9 @@ const shopRoutes = require('./routes/shop');
 // app can be passed 
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
 /*
 // example use of next()
 app.use((req, res, next) => {

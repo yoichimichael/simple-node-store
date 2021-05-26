@@ -6,6 +6,8 @@ const rootDir = require('../helpers/path');
 
 const router = express.Router();
 
+const products = [];
+
 // '/admin/add-product'=> GET
 router.get('/add-product', (req, res, next) => {
   // res.send(
@@ -22,5 +24,7 @@ router.post('/add-product', (req, res, next) => {
   res.redirect('/');
 });
 
+exports.routes = router;
+exports.products = products;
 
-module.exports = router;
+// module.exports = router;

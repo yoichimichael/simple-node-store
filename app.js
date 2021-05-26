@@ -10,7 +10,7 @@ const express = require('express');
 // const bodyParser = require('body-parser');
 
 // LOCAL IMPORTS
-const adminRoutes = require('./routes/admin');
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // variable 'app' can be named anything
@@ -34,9 +34,10 @@ app.use((req, res, next) => {
 // parses ALL incoming request bodies
 // automatically calls next()
 app.use(express.urlencoded({extended: false}));
+// instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 
 app.use(shopRoutes);
 

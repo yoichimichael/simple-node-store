@@ -7,19 +7,24 @@ const path = require('path');
 // variable 'express' is a top level function
 const express = require('express');
 
+// DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
 
-// LOCAL IMPORTS
-const adminData = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+
+const expressHbs = require('express-handlebars');
 
 // variable 'app' can be named anything
 // express() returns a top level management object
 // app can be passed 
 const app = express();
 
-app.set('view engine', 'pug');
+app.engine('hbs', expressHbs());
+app.set('view engine', 'hbs');
 app.set('views', 'views');
+
+// LOCAL ROUTE IMPORTS
+const adminData = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
 /*
 // example use of next()

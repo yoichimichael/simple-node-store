@@ -24,7 +24,7 @@ router.get('/add-product', (req, res, next) => {
   // );
   
   // used __dirname previously instead of importing rootDir
-  res.render('add-product', { docTitle: 'Add Product', path: '/admin/add-product' });
+  res.render('add-product', { pageTitle: 'Add Product', path: '/admin/add-product' });
 })
 
 // '/admin/add-product' => POST

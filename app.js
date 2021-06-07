@@ -10,19 +10,12 @@ const express = require('express');
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
 
-const expressHbs = require('express-handlebars');
-
 // variable 'app' can be named anything
 // express() returns a top level management object
 // app can be passed 
 const app = express();
 
-app.engine('hbs', expressHbs({
-  layoutsDir: 'views/layouts', 
-  defaultLayout: 'main-layout',
-  extname: 'hbs'}
-));
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // LOCAL ROUTE IMPORTS

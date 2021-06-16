@@ -3,8 +3,8 @@ const path = require('path');
 
 const express = require('express');
 
-const rootDir = require('../helpers/path');
-const productsData = require('../controllers/products');
+// const rootDir = require('../helpers/path');
+const productsController = require('../controllers/products');
 
 const router = express.Router();
 
@@ -16,16 +16,6 @@ const router = express.Router();
 // });
 
 // RENDERING A TEMPLATE
-router.get('/', (req, res, next) => {
-  const products = productsData.products;
-  res.render('shop', { 
-    pageTitle: 'Shop', 
-    prods: products, 
-    path: '/', 
-    hasProducts: products.length > 0,
-    activeShop: true,
-    productCSS: true
-  });
-});
+router.get('/', productsController.getProducts);
 
 module.exports = router;

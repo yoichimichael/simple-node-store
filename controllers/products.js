@@ -21,4 +21,14 @@ exports.postAddProduct = (req, res, next) => {
   res.redirect('/');
 }
 
+exports.getProducts = (req, res, next) => {
+  res.render('shop', { 
+    pageTitle: 'Shop', 
+    prods: products, 
+    path: '/', 
+    hasProducts: products.length > 0,
+    activeShop: true,
+    productCSS: true
+  });
+}
 exports.products = products;

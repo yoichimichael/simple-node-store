@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // LOCAL ROUTE IMPORTS
-const adminData = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 /*
@@ -41,7 +41,7 @@ app.use(express.urlencoded({extended: false}));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminData.routes);
+app.use('/admin', adminRoutes);
 
 app.use(shopRoutes);
 

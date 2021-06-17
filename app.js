@@ -22,6 +22,8 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
+const errorRoutes = require('./controllers/errors');
+
 /*
 // example use of next()
 app.use((req, res, next) => {
@@ -46,7 +48,7 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // ERROR HANDLER
-app.use();
+app.use(errorRoutes.getPageNotFound);
 
 // CREATE AND START SERVER
 /*

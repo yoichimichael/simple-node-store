@@ -22,7 +22,7 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
-const errorRoutes = require('./controllers/errors');
+const errorsController = require('./controllers/errors');
 
 /*
 // example use of next()
@@ -48,11 +48,11 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 // ERROR HANDLER
-app.use(errorRoutes.getPageNotFound);
+app.use(errorsController.getPageNotFound);
 
 // CREATE AND START SERVER
-/*
 // no longer need becuase of Express app methods
+/*
 const server = http.createServer(app);
 server.listen(3000);
 */

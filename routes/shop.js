@@ -1,5 +1,5 @@
-// core module
-const path = require('path');
+// CORE MODULE
+// const path = require('path');
 
 const express = require('express');
 

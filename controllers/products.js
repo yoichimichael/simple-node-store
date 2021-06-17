@@ -31,4 +31,5 @@ exports.getProducts = (req, res, next) => {
     productCSS: true
   });
 }
+
 exports.products = products;

@@ -11,7 +11,6 @@ module.exports = class Product {
   }
 
   save() {
-    
     fs.readFile(p, (err, fileContent) => {
       let products = [];
       if (!err) {
@@ -24,10 +23,10 @@ module.exports = class Product {
     });
   }
 
-  static fetchAll(){
+  static fetchAll(cb){
     fs.readFile(p, (err, fileContent) => {
-      if (err) return [];
-      return JSON.parse(fileContent);
+      if (err) cb([]);
+      cb(JSON.parse(fileContent));
     });
   }
 }

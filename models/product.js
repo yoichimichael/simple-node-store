@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const { getProducts } = require('../controllers/products');
+// const { getProducts } = require('../controllers/products');
 
 const rootDir = require('../helpers/path');
 
 const p = path.join(rootDir, 'data', 'products.json');
 
+// HELPER
 const getProductsFromFile = (cb) => {
   fs.readFile(p, (err, fileContent) => {
     if (err) return cb([]);

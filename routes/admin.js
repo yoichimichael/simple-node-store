@@ -20,6 +20,9 @@ const router = express.Router();
 
 router.get('/add-product', productsController.getAddProduct);
 
+// '/admin/products'=> GET
+router.get('/add-product');
+
 // '/admin/add-product' => POST
 router.post('/add-product', productsController.postAddProduct);
 

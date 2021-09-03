@@ -4,7 +4,7 @@
 const express = require('express');
 
 // const rootDir = require('../helpers/path');
-const productsController = require('../controllers/products');
+const shopController = require('../controllers/shop');
 
 const router = express.Router();
 
@@ -16,7 +16,7 @@ const router = express.Router();
 // });
 
 // RENDERING A TEMPLATE
-router.get('/', productsController.getProducts);
+router.get('/', shopController.getProducts);
 
 router.get('/products');
 

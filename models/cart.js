@@ -35,4 +35,8 @@ module.exports = class Cart {
     });
   }
 
+  static deleteProduct(id, productPrice){
+
+  }
+
 }

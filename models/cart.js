@@ -39,7 +39,7 @@ module.exports = class Cart {
     fs.readFile(p, (err, fileContent) => {
       if (err) return;
 
-      const updatedCart = { ...cart };
+      const updatedCart = { ...JSON.parse(fileContent) };
       const product = updatedCart.products.find(prod => prod.id === id);
       const productQty = product.qty;
 

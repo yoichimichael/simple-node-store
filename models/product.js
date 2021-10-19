@@ -56,7 +56,6 @@ module.exports = class Product {
           Cart.deleteProduct(id, product.price);
         }
       })
-      cb(product);
     })
   }
 

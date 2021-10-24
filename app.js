@@ -6,6 +6,7 @@ const path = require('path');
 
 // variable 'express' is a top level function
 const express = require('express');
+require('dotenv').config();
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
@@ -23,6 +24,20 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const errorsController = require('./controllers/errors');
+const db = require('./helpers/database');
+
+db.then(client => {
+  return client
+      .query('SELECT * FROM products')
+      .then(res => {
+        client.release()
+        console.log(res.rows[0])
+      })
+      .catch(err => {
+        client.release()
+        console.log(err.stack)
+      })
+})
 
 /*
 // example use of next()

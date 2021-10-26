@@ -1,4 +1,4 @@
-const db = require('../helpers/database');
+const db_pool = require('../helpers/database');
 
 const Cart = require('./cart');
 
@@ -20,18 +20,7 @@ module.exports = class Product {
   }
 
   static fetchAll(){
-    db.then(client => {
-      return client
-        .query('SELECT * FROM products')
-        .then(res => {
-          client.release() 
-          console.log(res.rows)
-        })
-        .catch(err => {
-          client.release()
-          console.log(err.stack)
-        })
-    })
+    return db_pool.query('SELECT * FROM products');
   }
 
   static findById(id){

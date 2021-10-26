@@ -20,11 +20,10 @@ exports.getProduct = (req, res, next) => {
       path: '/products' 
     })
   })
-  
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll().then().catch();
+  // Product.fetchAll().then().catch();
   // res.render('shop/index', { 
   //   pageTitle: 'Shop', 
   //   prods: products, 

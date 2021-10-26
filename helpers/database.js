@@ -1,6 +1,6 @@
-// const { Pool } = require('pg')
-// const connectionString = process.env.PG_DB_CONN;
+const { Pool } = require('pg')
+const connectionString = process.env.PG_DB_CONN;
 
-// module.exports = new Pool({
-//   connectionString
-// });
+module.exports = new Pool({
+  connectionString
+});

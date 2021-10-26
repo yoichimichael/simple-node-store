@@ -20,7 +20,7 @@ module.exports = class Product {
   }
 
   static fetchAll(){
-    // return db_pool.query('SELECT * FROM products');
+    return db_pool.query('SELECT * FROM products');
   }
 
   static findById(id){

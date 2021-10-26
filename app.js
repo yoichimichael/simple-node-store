@@ -24,20 +24,6 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 const errorsController = require('./controllers/errors');
-const db = require('./helpers/database');
-
-db.then(client => {
-  return client
-      .query('SELECT * FROM products')
-      .then(res => {
-        client.release() 
-        console.log(res.rows)
-      })
-      .catch(err => {
-        client.release()
-        console.log(err.stack)
-      })
-})
 
 /*
 // example use of next()

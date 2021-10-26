@@ -21,16 +21,16 @@ module.exports = class Product {
 
   static fetchAll(){
     db.then(client => {
-      client
-          .query('SELECT * FROM products')
-          .then(res => {
-            client.release() 
-            console.log(res.rows)
-          })
-          .catch(err => {
-            client.release()
-            console.log(err.stack)
-          })
+      return client
+        .query('SELECT * FROM products')
+        .then(res => {
+          client.release() 
+          console.log(res.rows)
+        })
+        .catch(err => {
+          client.release()
+          console.log(err.stack)
+        })
     })
   }
 

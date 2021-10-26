@@ -24,12 +24,12 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-  res.render('shop/index', { 
-    pageTitle: 'Shop', 
-    prods: products, 
-    path: '/'
-  });
+  Product.fetchAll().then().catch();
+  // res.render('shop/index', { 
+  //   pageTitle: 'Shop', 
+  //   prods: products, 
+  //   path: '/'
+  // });
 }
 
 exports.getCart = (req, res, next) => {

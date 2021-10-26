@@ -30,8 +30,8 @@ db.then(client => {
   return client
       .query('SELECT * FROM products')
       .then(res => {
-        client.release()
-        console.log(res.rows[0])
+        client.release() 
+        console.log(res.rows)
       })
       .catch(err => {
         client.release()

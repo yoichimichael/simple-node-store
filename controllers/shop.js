@@ -8,7 +8,7 @@ exports.getProducts = (req, res, next) => {
       prods: rows, 
       path: '/products'
     });
-  });
+  }).catch(console.log);
 }
 
 exports.getProduct = (req, res, next) => {

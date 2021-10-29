@@ -26,6 +26,6 @@ module.exports = class Product {
   }
 
   static findById(id){
-    
+    return db_pool.query('SELECT * FROM products WHERE products.id = $1', [id]);
   }
 }

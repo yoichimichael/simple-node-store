@@ -1,3 +1,35 @@
+const Sequelize = require('sequelize');
+
+const sequelize = require('../helpers/database');
+
+const Product = sequelize.define('product', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  }, 
+  title: Sequelize.STRING,
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+})
+
+module.exports = Product;
+
+/*
+=== USING POSTGRES with SQL statements ===
+
+
 const db_pool = require('../helpers/database');
 
 const Cart = require('./cart');
@@ -29,3 +61,5 @@ module.exports = class Product {
     return db_pool.query('SELECT * FROM products WHERE products.id = $1', [id]);
   }
 }
+
+*/

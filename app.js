@@ -6,6 +6,7 @@ const path = require('path');
 
 // variable 'express' is a top level function
 const express = require('express');
+const sequelize = require('./helpers/database');
 require('dotenv').config();
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
@@ -51,6 +52,13 @@ app.use(shopRoutes);
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
 
+sequelize.sync()
+  .then(result => {
+    console.log(result);
+    app.listen(3000);
+  })
+  .catch(console.log);
+
 // CREATE AND START SERVER
 // no longer need becuase of Express app methods
 /*
@@ -59,4 +67,4 @@ server.listen(3000);
 */
 
 // instead of the above:
-app.listen(3000);
+// app.listen(3000);

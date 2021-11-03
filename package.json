@@ -19,6 +19,9 @@
     "express": "^4.17.1",
     "express-handlebars": "3.0",
     "pg": "^8.7.1",
-    "pug": "^3.0.2"
+    "pg-hstore": "^2.3.4",
+    "pug": "^3.0.2",
+    "sequelize": "^6.9.0",
+    "sequelize-cli": "^6.2.0"
   }
 }

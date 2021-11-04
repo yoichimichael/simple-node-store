@@ -24,12 +24,12 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll().then(({ rows }) => {
+  Product.findAll().then(products => {
     res.render('shop/index', { 
       pageTitle: 'Shop', 
-      prods: rows, 
+      prods: products, 
       path: '/'
-    });  
+    });
   }).catch(console.log);
 }
 

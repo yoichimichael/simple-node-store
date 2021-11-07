@@ -45,14 +45,17 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const id = req.body.productId;
   const { title, price, imageUrl, description } = req.body;
-  Product.findByPk(id).then(product => {
-    product.update({
-      title,
-      price,
-      imageUrl,
-      description
-    }).then(() => {res.redirect('/admin/products')});
-  }).catch(console.log);
+  Product.findByPk(id)
+    .then(product => {
+      return product.update({
+        title,
+        price,
+        imageUrl,
+        description
+      })
+    })
+    .then(() => {res.redirect('/admin/products')})
+    .catch(console.log);
 };
 
 exports.getProducts = (req, res, next) => {

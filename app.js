@@ -54,7 +54,11 @@ app.use(shopRoutes);
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
 
-sequelize.sync()
+Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Product); // redundant, but makes relationship clear
+
+sequelize
+  .sync({ force: true })
   .then(result => {
     app.listen(3000);
   })

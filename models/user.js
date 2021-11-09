@@ -9,19 +9,8 @@ const User = sequelize.define('user', {
     allowNull: false,
     primaryKey: true,
   }, 
-  firstName: Sequelize.STRING,
-  price: {
-    type: Sequelize.DOUBLE,
-    allowNull: false,
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
+  name: Sequelize.STRING,
+  email:  Sequelize.STRING,
 })
 
 module.exports = Product;

@@ -47,6 +47,15 @@ app.use(express.urlencoded({extended: false}));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then(user => {
+      req.user = user; 
+      next();
+    })
+    .catch(console.log);
+})
+
 app.use('/admin', adminRoutes);
 
 app.use(shopRoutes);

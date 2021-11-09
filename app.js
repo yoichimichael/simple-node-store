@@ -60,6 +60,16 @@ User.hasMany(Product); // redundant, but makes relationship clear
 sequelize
   .sync({ force: true })
   .then(result => {
+    return User.findByPk(1);
+  })
+  .then(user => {
+    if (!user) {
+      return User.create({ name: 'Yoichi', email: 'test@testing.com' });
+    } 
+    return user;
+  })
+  .then(user => {
+    console.log(user);
     app.listen(3000);
   })
   .catch(console.log);

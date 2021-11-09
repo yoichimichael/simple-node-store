@@ -7,6 +7,8 @@ const path = require('path');
 // variable 'express' is a top level function
 const express = require('express');
 const sequelize = require('./helpers/database');
+const Product = require('./models/product');
+const User = require('./models/user');
 require('dotenv').config();
 
 // DEPRECATED - urlencoded() and static() are now part of the express object

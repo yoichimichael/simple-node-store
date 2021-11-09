@@ -13,4 +13,4 @@ const User = sequelize.define('user', {
   email:  Sequelize.STRING,
 })
 
-module.exports = Product;
+module.exports = User;

@@ -9,6 +9,8 @@ const express = require('express');
 const sequelize = require('./helpers/database');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Cart = require('./models/cart');
+const CartItem = require('./models/cart-item');
 require('dotenv').config();
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
@@ -65,9 +67,14 @@ app.use(errorsController.getPageNotFound);
 
 Product.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Product); // redundant, but makes relationship clear
+User.hasOne(Cart);
+Cart.belongsTo(User); // also redundant, but makes relationship clear
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 
 sequelize
   .sync({ force: true })
+  // .sync()
   .then(result => {
     return User.findByPk(1);
   })

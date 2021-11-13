@@ -67,9 +67,14 @@ exports.postCart = (req, res, next) => {
       }
       return Product.findByPk(prodId)
         .then(product => {
-          return fetchedCart.addProduct(product, { through: { quantity: newQuantity } });
+          return fetchedCart.addProduct(product, { 
+            through: { quantity: newQuantity } 
+          });
         })
         .catch(console.log)
+    })
+    .then(() => {
+      res.redirect('/cart')
     })
     .catch(console.log);
 }

@@ -11,6 +11,8 @@ const Product = require('./models/product');
 const User = require('./models/user');
 const Cart = require('./models/cart');
 const CartItem = require('./models/cart-item');
+const Order = require('./models/order');
+const OrderItem = require('./models/order-item');
 require('dotenv').config();
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
@@ -71,6 +73,9 @@ User.hasOne(Cart);
 Cart.belongsTo(User); // also redundant, but makes relationship clear
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 
 sequelize
   .sync({ force: true })

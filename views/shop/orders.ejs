@@ -8,12 +8,12 @@
 				<h1>Nothing there!</h1>
 			<% } else { %>
 				<ul>
-					<% order.forEach(order => { %> 
+					<% orders.forEach(order => { %> 
 						<li>
 							<h1># <%= order.id %></h1>
 							<ul>
-								<% order.orderItem.forEach(item => { %> 
-									<li><%= item.title %></li>
+								<% order.products.forEach(product => { %> 
+									<li><%= product.title %> (<%= product.orderItem.quantity %> )</li>
 								<% }); %> 
 							</ul>	
 						</li>

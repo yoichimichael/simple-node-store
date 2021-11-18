@@ -4,13 +4,11 @@ const path = require('path');
 const express = require('express');
 
 const errorsController = require('./controllers/errors');
+const mongoConnect = require('./helpers/database');
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
 
-// variable 'app' can be named anything
-// express() returns a top level management object
-// app can be passed 
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -19,6 +17,7 @@ app.set('views', 'views');
 // LOCAL ROUTE IMPORTS
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+const { application } = require('express');
 
 
 
@@ -29,17 +28,21 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findByPk(1)
-    .then(user => {
-      req.user = user; 
-      next();
-    })
-    .catch(console.log);
+  // User.findByPk(1)
+  //   .then(user => {
+  //     req.user = user; 
+  //     next();
+  //   })
+  //   .catch(console.log);
 })
 
 app.use('/admin', adminRoutes);
-
 app.use(shopRoutes);
 
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
+
+mongoConnect(client => {
+  console.log(client);
+  app.listen(3000);
+})

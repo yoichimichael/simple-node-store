@@ -1,23 +1,15 @@
-const { Sequelize } = require('sequelize');
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-// const sequelize = new Sequelize(process.env.PG_DB_CONN);
+const mongoDbPass = process.env.MONGO_DB_PASS;
 
-const sequelize = new Sequelize('academind_node_shop', 'Yoichi', `${process.env.PG_DB_PASS}`, {
-  host: 'localhost',
-  dialect: 'postgres',
-});
+const mongoConnect = (callback) => {
+  MongoClient.connect(`mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
+  .then(client => {
+    console.log("CONNECTED!");
+    callback(client);
+  })
+  .catch(console.log)
+}
 
-module.exports = sequelize;
-
-/* 
-=== Connecting to DB with pg package ===
-
-const { Pool } = require('pg')
-const connectionString = process.env.PG_DB_CONN;
-
-module.exports = new Pool({
-  connectionString
-});
-*/
-
-
+module.exports = mongoConnect;

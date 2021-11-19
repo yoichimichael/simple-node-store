@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // LOCAL ROUTE IMPORTS
-// const adminRoutes = require('./routes/admin');
+const adminRoutes = require('./routes/admin');
 // const shopRoutes = require('./routes/shop');
 
 // parses ALL incoming request bodies
@@ -33,13 +33,12 @@ app.use((req, res, next) => {
   //   .catch(console.log);
 })
 
-// app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 // app.use(shopRoutes);
 
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
 
-mongoConnect(client => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 })

@@ -5,7 +5,7 @@ const mongoDbPass = process.env.MONGO_DB_PASS;
 let _db;
 
 const mongoConnect = (callback) => {
-  MongoClient.connect(`mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
+  MongoClient.connect(`mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/Cluster0?retryWrites=true&w=majority`)
   .then(client => {
     console.log("CONNECTED!");
     _db = client.db();

@@ -4,7 +4,7 @@ const path = require('path');
 const express = require('express');
 
 const errorsController = require('./controllers/errors');
-const mongoConnect = require('./helpers/database');
+const { mongoConnect } = require('./helpers/database');
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');

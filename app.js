@@ -15,11 +15,8 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 // LOCAL ROUTE IMPORTS
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
-const { application } = require('express');
-
-
+// const adminRoutes = require('./routes/admin');
+// const shopRoutes = require('./routes/shop');
 
 // parses ALL incoming request bodies
 // automatically calls next()
@@ -36,8 +33,8 @@ app.use((req, res, next) => {
   //   .catch(console.log);
 })
 
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
+// app.use('/admin', adminRoutes);
+// app.use(shopRoutes);
 
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);

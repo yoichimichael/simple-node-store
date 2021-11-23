@@ -16,7 +16,7 @@ app.set('views', 'views');
 
 // LOCAL ROUTE IMPORTS
 const adminRoutes = require('./routes/admin');
-// const shopRoutes = require('./routes/shop');
+const shopRoutes = require('./routes/shop');
 
 // parses ALL incoming request bodies
 // automatically calls next()
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/admin', adminRoutes);
-// app.use(shopRoutes);
+app.use(shopRoutes);
 
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);

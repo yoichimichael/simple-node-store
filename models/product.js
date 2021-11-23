@@ -15,6 +15,12 @@ class Product {
       .then(console.log)
       .catch(console.log)
   }
+
+  static fetchAll(){
+    const db = getDb();
+    return db.collection('products')
+      .find();
+  }
 }
 
 module.exports = Product;

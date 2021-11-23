@@ -31,6 +31,7 @@ app.use((req, res, next) => {
   //     next();
   //   })
   //   .catch(console.log);
+  next();
 })
 
 app.use('/admin', adminRoutes);

@@ -20,44 +20,42 @@ exports.postAddProduct = (req, res, next) => {
     .catch(console.log);  
 }
 
-// exports.getEditProduct = (req, res, next) => {
-//   const editMode = req.query.edit;
-//   if (!editMode) {
-//     return res.redirect('/');
-//   }
-//   const prodId = req.params.productId;
-//   req.user
-//     .getProducts({ where: { id: prodId } })
-//     .then(products => {
-//       const product = products[0];
-//       if (!product) {
-//         return res.redirect('/');
-//       }
-//       res.render('admin/edit-product', { 
-//         pageTitle: 'Edit Product', 
-//         path: '/admin/edit-product',
-//         editing: editMode,
-//         product
-//       });
-//     })
-//     .catch(console.log);
-// }
+exports.getEditProduct = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect('/');
+  }
+  const prodId = req.params.productId;
+  Product.findById(prodId)
+    .then(product => {
+      if (!product) {
+        return res.redirect('/');
+      }
+      res.render('admin/edit-product', { 
+        pageTitle: 'Edit Product', 
+        path: '/admin/edit-product',
+        editing: editMode,
+        product
+      });
+    })
+    .catch(console.log);
+}
 
-// exports.postEditProduct = (req, res, next) => {
-//   const id = req.body.productId;
-//   const { title, price, imageUrl, description } = req.body;
-//   Product.findByPk(id)
-//     .then(product => {
-//       return product.update({
-//         title,
-//         price,
-//         imageUrl,
-//         description
-//       })
-//     })
-//     .then(() => {res.redirect('/admin/products')})
-//     .catch(console.log);
-// };
+exports.postEditProduct = (req, res, next) => {
+  const id = req.body.productId;
+  const { title, price, imageUrl, description } = req.body;
+  Product.findById(id)
+    .then(product => {
+      return product.update({
+        title,
+        price,
+        imageUrl,
+        description
+      })
+    })
+    .then(() => {res.redirect('/admin/products')})
+    .catch(console.log);
+};
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll()

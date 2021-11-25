@@ -7,14 +7,14 @@ class Product {
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
-    this._id = new ObjectId(_id);
+    this._id = _id ? new ObjectId(_id) : null;
   }
 
   save() {
     const db = getDb();
     let dbOp;
     if (this._id) {
-      console.log('id found')
+      console.log('id on object found')
       dbOp = db
         .collection('products')
         .updateOne({ _id: this._id }, { $set: this })
@@ -50,6 +50,15 @@ class Product {
         console.log(product);
         return product;
       })
+      .catch(console.log);
+  }
+
+  static deleteById(prodId){
+    const db = getDb();
+    return db
+      .collection('products')
+      .deleteOne({ _id: new ObjectId(prodId)})
+      .then(() => console.log("Product Deleted From Collection"))
       .catch(console.log);
   }
 }

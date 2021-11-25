@@ -6,17 +6,18 @@ class Product {
     this.title = title;
     this.price = price;
     this.description = description;
-    this.iamgeUrl = imageUrl;
-    this._id = _id;
+    this.imageUrl = imageUrl;
+    this._id = new ObjectId(_id);
   }
 
   save() {
     const db = getDb();
     let dbOp;
     if (this._id) {
+      console.log('id found')
       dbOp = db
         .collection('products')
-        .updateOne({ _id: new ObjectId(this._id) }, {$set: this})
+        .updateOne({ _id: this._id }, { $set: this })
     } else {
       dbOp = db
         .collection('products')

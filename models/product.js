@@ -1,4 +1,4 @@
-const { ObjectId, TopologyDescriptionChangedEvent } = require('mongodb')
+const { ObjectId } = require('mongodb')
 const { getDb } = require('../helpers/database');
 
 class Product {

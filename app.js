@@ -5,6 +5,7 @@ const express = require('express');
 
 const errorsController = require('./controllers/errors');
 const { mongoConnect } = require('./helpers/database');
+const User = require('./models/user');
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
@@ -25,12 +26,12 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  // User.findByPk(1)
-  //   .then(user => {
-  //     req.user = user; 
-  //     next();
-  //   })
-  //   .catch(console.log);
+  User.findById(1)
+    .then(user => {
+      req.user = user; 
+      next();
+    })
+    .catch(console.log);
   next();
 })
 

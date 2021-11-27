@@ -18,13 +18,12 @@ class User {
     const db = getDb();
     return db
       .collection('users')
-      .find({ _id: new ObjectId(userId) })
-      .next()
-      .then(user => {
-        console.log(user);
-        return user;
-      })
-      .catch(console.log);
+      .findOne({ _id: new ObjectId(userId) })
+      // .then(user => {
+      //   console.log(user);
+      //   return user;
+      // })
+      // .catch(console.log);
   }
 }
 

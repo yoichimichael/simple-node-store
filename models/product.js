@@ -1,13 +1,14 @@
-const { ObjectId } = require('mongodb')
+const { ObjectId, TopologyDescriptionChangedEvent } = require('mongodb')
 const { getDb } = require('../helpers/database');
 
 class Product {
-  constructor({ title, price, description, imageUrl, _id}) {
+  constructor({ title, price, description, imageUrl, _id, userId}) {
     this.title = title;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
     this._id = _id ? new ObjectId(_id) : null;
+    this.userId = userId;
   }
 
   save() {

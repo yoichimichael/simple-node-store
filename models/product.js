@@ -45,8 +45,7 @@ class Product {
   static findById(prodId){
     const db = getDb();
     return db.collection('products')
-      .find({ _id: new ObjectId(prodId) })
-      .next()
+      .findOne({ _id: new ObjectId(prodId) })
       .then(product => {
         console.log(product);
         return product;

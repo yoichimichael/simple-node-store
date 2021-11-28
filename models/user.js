@@ -2,8 +2,8 @@ const { ObjectId } = require('mongodb')
 const { getDb } = require('../helpers/database');
 
 class User {
-  constructor(username, email, cart, id) {
-    this.name = username;
+  constructor(name, email, cart, id) {
+    this.name = name;
     this.email = email;
     this.cart = cart;
     this._id = id;

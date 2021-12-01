@@ -22,13 +22,16 @@ exports.getProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll().then(products => {
-    res.render('shop/index', { 
-      pageTitle: 'Shop', 
-      prods: products, 
-      path: '/'
-    });
-  }).catch(console.log);
+  Product
+    .fetchAll()
+    .then(products => {
+      res.render('shop/index', { 
+        pageTitle: 'Shop', 
+        prods: products, 
+        path: '/'
+      });
+    })
+    .catch(console.log);
 }
 
 exports.getCart = (req, res, next) => {
@@ -53,7 +56,9 @@ exports.postCart = (req, res, next) => {
       const user = req.user;
       return user.addToCart(product);
     })
-    .then(console.log)
+    .then(result => {
+      console.log("this is result of updating a collection: ", result);
+    })
     .catch(console.log) 
   // let fetchedCart;
   // let newQuantity = 1;

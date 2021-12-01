@@ -1,12 +1,12 @@
-const { ObjectId } = require('mongodb')
+const { ObjectId } = require('mongodb');
 const { getDb } = require('../helpers/database');
 
 class User {
-  constructor(name, email, cart, id) {
+  constructor({name, email, cart, _id}) {
     this.name = name;
     this.email = email;
     this.cart = cart;
-    this._id = id;
+    this._id = _id;
   }
 
   save() {
@@ -27,7 +27,7 @@ class User {
       .updateOne(
         { _id: new ObjectId(this._id) },
         { $set: { cart: updatedCart } }
-      )
+      );
   }
 
   static findById(userId){

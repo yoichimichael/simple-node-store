@@ -55,7 +55,8 @@ exports.postCart = (req, res, next) => {
       return user.addToCart(product);
     })
     .then(result => {
-      console.log("this is result of updating a collection: ", result);
+      console.log(result);
+      res.redirect('/cart');
     })
     .catch(console.log) 
   // let fetchedCart;

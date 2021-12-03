@@ -77,7 +77,7 @@ class User {
 
   addOrder() {
     const db = getDb();
-    this.getCart()
+    return this.getCart()
       .then(products => {
         const order = {
           items: products,

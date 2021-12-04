@@ -78,12 +78,12 @@ exports.postOrder = (req, res, next) => {
     .then(results => {
       res.redirect('/orders');
     })
-    .catch(console.log)
+    .catch(console.log) 
 }
 
 exports.getOrders = (req, res, next) => {
   req.user
-    .getOrders({ include: ['products'] })
+    .getOrders()
     .then(orders => {
       res.render('shop/orders', {
         path: '/orders',

@@ -1,4 +1,4 @@
-const mongoose = require('require');
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
@@ -21,6 +21,7 @@ const productSchema = new Schema({
   }
 });
 
+module.exports = mongoose.model('Product', productSchema);
 
 // const { ObjectId } = require('mongodb')
 // const { getDb } = require('../helpers/database');

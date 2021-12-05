@@ -2,6 +2,7 @@ require('dotenv').config();
 const path = require('path');
 
 const express = require('express');
+const mongoose = require('mongoose');
 
 const errorsController = require('./controllers/errors');
 const { mongoConnect } = require('./helpers/database');
@@ -45,6 +46,4 @@ app.use(shopRoutes);
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
 
-mongoConnect(() => {
-  app.listen(3000);
-})
+mongoose.connect('');

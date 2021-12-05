@@ -4,8 +4,8 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 
+const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
-const { mongoConnect } = require('./helpers/database');
 const User = require('./models/user');
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
@@ -46,4 +46,11 @@ app.use(shopRoutes);
 // ERROR HANDLER
 app.use(errorsController.getPageNotFound);
 
-mongoose.connect('');
+mongoose
+  .connect(
+    `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`
+  )
+  .then(() => {
+    app.listen(3000);
+  })
+  .catch(console.log);

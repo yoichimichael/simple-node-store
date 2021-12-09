@@ -49,18 +49,18 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  const { title, price, imageUrl, description } = req.body;
-  
-  const product = new Product({ 
-    title, 
-    price, 
-    imageUrl, 
-    description, 
-    _id: prodId, 
-  });
-  product.save()
+  const { title, price, imageUrl, description } = req.body;  
+  Product.findById(prodId)
+    .then(product => {
+      product.title = title;
+      product.price = price;
+      product.imageUrl = imageUrl;
+      product.description = description;
+      return product.save()
+    })
     .then(() => {res.redirect('/admin/products')})
     .catch(console.log);
+  
 };
 
 exports.getProducts = (req, res, next) => {

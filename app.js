@@ -26,20 +26,15 @@ app.use(express.urlencoded({extended: false}));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use((req, res, next) => {
-  // User.findById('61a27a29587f327b0e1a52b9')
-  //   .then(user => {
-  //     req.user = new User({ 
-  //       name: user.name, 
-  //       email: user.email, 
-  //       cart: user.cart, 
-  //       _id: user._id 
-  //     }); 
-  //     next();
-  //   })
-  //   .catch(console.log);
-  // next();
-// })
+app.use((req, res, next) => {
+  User.findById('61b5ab9e1e11210c8d4221bb')
+    .then(user => {
+      req.user = user;
+      next();
+    })
+    .catch(console.log);
+  next();
+})
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
@@ -52,14 +47,19 @@ mongoose
     `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`
   )
   .then(() => {
-    const user = new User({
-      name: 'Yoichi',
-      email: 'ynagano@pm.me',
-      cart: {
-        items: []
-      }
-    });
-    user.save();
+    User.findOne()
+      .then(user => {
+        if (!user) {
+          const user = new User({
+            name: 'Yoichi',
+            email: 'ynagano@pm.me',
+            cart: {
+              items: []
+            }
+          });
+          user.save();
+        }
+      })
     app.listen(3000);
   })
   .catch(console.log);

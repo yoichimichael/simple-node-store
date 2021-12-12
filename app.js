@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
-// const User = require('./models/user');
+const User = require('./models/user');
 
 // DEPRECATED - urlencoded() and static() are now part of the express object
 // const bodyParser = require('body-parser');
@@ -52,6 +52,13 @@ mongoose
     `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`
   )
   .then(() => {
+    const user = new User({
+      name: 'Yoichi',
+      email: 'ynagano@pm.me',
+      cart: {
+        items: []
+      }
+    });
     app.listen(3000);
   })
   .catch(console.log);

@@ -59,6 +59,7 @@ mongoose
         items: []
       }
     });
+    user.save();
     app.listen(3000);
   })
   .catch(console.log);

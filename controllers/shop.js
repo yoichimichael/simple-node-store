@@ -43,10 +43,11 @@ exports.getCart = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
     .then(user => {
+      console.log("items:", user.cart.items);
       const products = user.cart.items.map(i => ({
-        title: i.productId.title,
-        quantity: i.quantity,
-        _id: i.productId._id
+          title: i.productId.title,
+          quantity: i.quantity,
+          _id: i.productId._id
       }));
       res.render('shop/cart', {
         path: '/cart',

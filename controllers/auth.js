@@ -4,3 +4,7 @@ exports.getLogin = (req, res, next) => {
     pageTitle: 'Login Orders'
   });
 }
+
+exports.postLogin = (req, res, next) => {
+  res.redirect('/');
+}

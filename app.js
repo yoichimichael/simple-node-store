@@ -3,6 +3,7 @@ const path = require('path');
 
 const express = require('express');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
@@ -27,6 +28,13 @@ const authRoutes = require('./routes/auth');
 app.use(express.urlencoded({extended: false}));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({ 
+    secret: 'my secret', 
+    resave: false, 
+    saveUninitialized: false 
+  })
+);
 
 app.use((req, res, next) => {
   User.findById('61ba1a8f55a4d2f152617864')

@@ -4,11 +4,11 @@ exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login Orders',
-    isAuthenticated: isLoggedIn
+    isAuthenticated: (isLoggedIn === 'true' ? true : false)
   });
 }
 
 exports.postLogin = (req, res, next) => {
-  res.set('Set-Cookie', 'loggedIn=true');
+  res.set('Set-Cookie', 'loggedIn=true; HttpOnly');
   res.redirect('/');
 }

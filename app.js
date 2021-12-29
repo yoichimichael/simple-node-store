@@ -22,12 +22,12 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
 
-
 // parses ALL incoming request bodies
 // automatically calls next()
 app.use(express.urlencoded({extended: false}));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
+// session middleware with options
 app.use(
   session({ 
     secret: 'my secret', 

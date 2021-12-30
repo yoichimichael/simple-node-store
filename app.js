@@ -4,15 +4,19 @@ const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
 const User = require('./models/user');
 
-// DEPRECATED - urlencoded() and static() are now part of the express object
-// const bodyParser = require('body-parser');
+const MONGODB_URI = `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`;
 
 const app = express();
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: 'sessions',
+});
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -53,9 +57,7 @@ app.use(authRoutes);
 app.use(errorsController.getPageNotFound);
 
 mongoose
-  .connect(
-    `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`
-  )
+  .connect(MONGODB_URI)
   .then(() => {
     User.findOne()
       .then(user => {

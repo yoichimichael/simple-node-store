@@ -16,7 +16,7 @@ exports.postAddProduct = (req, res, next) => {
     price, 
     imageUrl, 
     description,
-    userId: req.session.user // with relations setup, mongodb will only assign id, not full object
+    userId: req.user // with relations setup, mongoose will only assign id, not full object
   });
   product 
     .save()

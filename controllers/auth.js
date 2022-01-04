@@ -32,7 +32,23 @@ exports.postLogin = (req, res, next) => {
     .catch(console.log);
 }
 
-exports.postSignup = (req, res, next) => {};
+exports.postSignup = (req, res, next) => {
+  const { email, password, confirmPassword } = req.body;
+
+  User.findOne({ email })
+    .then(userDoc => {
+      if (userDoc) {
+        return res.redirect('/signup');
+      }
+
+      const user = new User({
+        email,
+        password,
+      })
+    })
+    .catch(console.log);
+
+};
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {

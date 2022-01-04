@@ -41,22 +41,22 @@ exports.postSignup = (req, res, next) => {
 
   User.findOne({ email })
     .then(userDoc => {
-      if (userDoc) {
+      if (userDoc) 
         return res.redirect('/signup');
-      }
 
-      return bcrypt.hash(password, 12);
-    })
-    .then(hashedPassword => {
-      const user = new User({
-        email,
-        password: hashedPassword,
-        cart: { items: [] } 
-      });
-      return user.save();
-    })
-    .then(result => {
-      res.redirect('/login');
+      return bcrypt
+        .hash(password, 12)
+        .then(hashedPassword => {
+          const user = new User({
+            email,
+            password: hashedPassword,
+            cart: { items: [] } 
+          });
+          return user.save();
+        })
+        .then(result => {
+          res.redirect('/login');
+        });
     })
     .catch(console.log);
 

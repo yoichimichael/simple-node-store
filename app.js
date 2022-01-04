@@ -63,19 +63,6 @@ app.use(errorsController.getPageNotFound);
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    User.findOne()
-      .then(user => {
-        if (!user) {
-          const user = new User({
-            name: 'Yoichi',
-            email: 'ynagano@pm.me',
-            cart: {
-              items: []
-            }
-          });
-          user.save();
-        }
-      })
     app.listen(3000);
   })
   .catch(console.log);

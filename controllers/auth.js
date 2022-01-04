@@ -44,7 +44,12 @@ exports.postSignup = (req, res, next) => {
       const user = new User({
         email,
         password,
-      })
+        cart: { items: [] } 
+      });
+      return user.save();
+    })
+    .then(result => {
+      res.redirect('/login');
     })
     .catch(console.log);
 

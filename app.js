@@ -5,6 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const csurf = require('csurf');
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
@@ -17,6 +18,8 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions',
 });
+
+const csrfProtection = csurf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -40,6 +43,7 @@ app.use(
     store: store
   })
 );
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
   if (!req.session.user) {

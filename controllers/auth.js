@@ -6,6 +6,7 @@ exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login Orders',
+    errorMessage: req.flash('error'),
   });
 }
 

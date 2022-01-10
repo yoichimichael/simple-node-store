@@ -2,16 +2,19 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendGridTransport = require('nodemailer-sendgrid-transport');
+const sgMail = require('@sendgrid/mail');
 
 const User = require('../models/user');
 
-const sendGridKey = process.env.SENDGRID_KEY;
+// const sendGridKey = process.env.SENDGRID_KEY;
 
-const transporter = nodemailer.createTransport(sendGridTransport({
-  auth: {
-    api_key: sendGridKey,
-  }
-}));
+sgMail.setApiKey(process.env.SENDGRID_KEY);
+
+// const transporter = nodemailer.createTransport(sendGridTransport({
+//   auth: {
+//     api_key: sendGridKey,
+//   }
+// }));
 
 exports.getLogin = (req, res, next) => {
   const message = req.flash('error')[0];
@@ -85,12 +88,22 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          return transporter.sendMail({
-            to: email,
-            from: 'info@simple-node-store.com',
-            subject: 'Signup Succeeded!',
-            html: '<h1>You successfully signed up!</h1>'
-          });
+          // return transporter.sendMail({
+          //   to: email,
+          //   from: 'ynagano@pm.me',
+          //   subject: 'Signup Succeeded!',
+          //   html: '<h1>You successfully signed up!</h1>'
+          // });
+          return sgMail
+            .send({
+              to: email,
+              from: 'ynagano@pm.me',
+              subject: 'Signup Succeeded!',
+              html: '<h1>You successfully signed up!</h1>'
+            })
+            .then(() => {
+              console.log('email sent');
+            })
         })
         .catch(console.log);
     })

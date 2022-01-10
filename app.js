@@ -46,7 +46,7 @@ app.use(
 );
 //CSRF protection middleware
 app.use(csrfProtection);
-//flash middleware
+//flash middleware 
 app.use(flash());
 
 app.use((req, res, next) => {

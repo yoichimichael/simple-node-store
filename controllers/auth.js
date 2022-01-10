@@ -1,6 +1,17 @@
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+const sendGridTransport = require('nodemailer-sendgrid-transport');
 
 const User = require('../models/user');
+
+const sendGridKey = process.env.SENDGRID_KEY;
+
+const transporter = nodemailer.createTransport(sendGridTransport({
+  auth: {
+    api_key: sendGridKey,
+  }
+}));
 
 exports.getLogin = (req, res, next) => {
   const message = req.flash('error')[0];

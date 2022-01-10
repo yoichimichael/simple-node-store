@@ -85,7 +85,14 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-        });
+          return transporter.sendMail({
+            to: email,
+            from: 'info@simple-node-store.com',
+            subject: 'Signup Succeeded!',
+            html: '<h1>You successfully signed up!</h1>'
+          });
+        })
+        .catch(console.log);
     })
     .catch(console.log);
 

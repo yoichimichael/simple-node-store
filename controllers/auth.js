@@ -6,15 +6,7 @@ const sgMail = require('@sendgrid/mail');
 
 const User = require('../models/user');
 
-// const sendGridKey = process.env.SENDGRID_KEY;
-
 sgMail.setApiKey(process.env.SENDGRID_KEY);
-
-// const transporter = nodemailer.createTransport(sendGridTransport({
-//   auth: {
-//     api_key: sendGridKey,
-//   }
-// }));
 
 exports.getLogin = (req, res, next) => {
   const message = req.flash('error')[0];
@@ -88,12 +80,6 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
           res.redirect('/login');
-          // return transporter.sendMail({
-          //   to: email,
-          //   from: 'ynagano@pm.me',
-          //   subject: 'Signup Succeeded!',
-          //   html: '<h1>You successfully signed up!</h1>'
-          // });
           return sgMail
             .send({
               to: email,

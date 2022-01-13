@@ -1,7 +1,5 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
-const sendGridTransport = require('nodemailer-sendgrid-transport');
 const sgMail = require('@sendgrid/mail');
 
 const User = require('../models/user');

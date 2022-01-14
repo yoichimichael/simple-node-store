@@ -1,4 +1,6 @@
 require('dotenv').config();
+const crypto = require('crypto');
+
 const bcrypt = require('bcryptjs');
 const sgMail = require('@sendgrid/mail');
 
@@ -109,4 +111,14 @@ exports.getReset = (req, res, next) => {
     pageTitle: 'Reset Password',
     errorMessage: message,
   });
+}
+
+exports.postReset = (req, res, next) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res.redirect('/reset');
+    }
+    const token = buffer.toString('hex')
+  })
 }

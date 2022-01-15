@@ -138,7 +138,7 @@ exports.postReset = (req, res, next) => {
             from: 'ynagano@pm.me',
             subject: 'Password reset',
             html: `
-              <p>You requested a password reset</p>
+              <p>You requested a password reset.</p>
               <p>Click this <a href="http://localhost:3000/reset-password/${token}">link</a> to set a new password.</p>
             `
           })

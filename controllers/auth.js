@@ -147,7 +147,7 @@ exports.postReset = (req, res, next) => {
   })
 }
 
-exports.getNewPassord = (req, res, next) => {
+exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
   User.findOne({ 
     resetToken: token, 
@@ -162,7 +162,5 @@ exports.getNewPassord = (req, res, next) => {
       userId: user._id.toString()
     });
   })
-  .catch(console.log)
-
-  
+  .catch(console.log);
 }

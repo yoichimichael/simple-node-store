@@ -187,5 +187,8 @@ exports.postNewPassword = (req, res, next) => {
     userWithPasswordToReset.resetTokenExpiration = undefined;
     return userWithPasswordToReset.save();
   })
+  .then(result => {
+    res.redirect('/login');
+  })
   .catch(console.log)
 }

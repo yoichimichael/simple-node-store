@@ -52,7 +52,7 @@ exports.postEditProduct = (req, res, next) => {
   const { title, price, imageUrl, description } = req.body;  
   Product.findById(prodId)
     .then(product => {
-      if (product.userId !== req.user._id) {
+      if (product.userId.toString() !== req.user._id.toString()) {
         return res.redirect('/');
       }
       product.title = title;

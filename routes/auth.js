@@ -1,6 +1,6 @@
 const express = require('express');
 const { check, body } = require('express-validator');
-const { isValidObjectId } = require('mongoose');
+// const { isValidObjectId } = require('mongoose');
 
 const authController = require('../controllers/auth');
 const User = require('../models/user');
@@ -11,7 +11,23 @@ router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
-router.post('/login', authController.postLogin);
+router.post(
+	'/login', 
+	[
+		body(
+			'email',
+			'Please enter a valid email.'
+		)
+			.isEmail(),
+		body(
+			'password',
+			'Please enter password using only numbers and text with at least 5 characters'
+		)
+			.isLength({ min: 5 })
+			.isAlphanumeric(),
+	],	
+	authController.postLogin
+);
 
 router.post(
   '/signup', 

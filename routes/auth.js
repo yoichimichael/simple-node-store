@@ -1,5 +1,6 @@
 const express = require('express');
-const { check } = require('express-validator');
+const { check, body } = require('express-validator');
+const { isValidObjectId } = require('mongoose');
 
 const authController = require('../controllers/auth');
 
@@ -13,15 +14,23 @@ router.post('/login', authController.postLogin);
 
 router.post(
   '/signup', 
-  check('email')
-    .isEmail()
-    .withMessage('Please enter a valid email.')
-		.custom(( value, { req } ) => {
+	[
+		check('email')
+    	.isEmail()
+    	.withMessage('Please enter a valid email.')
+			.custom(( value, { req } ) => {
 			if (value === 'test@test.com') {
 				throw new Error('This email address is forbidden')
 			}
 			return true;
-		}), 
+			}), 
+		body(
+			'password',
+			'Please enter password using only numbers and text with at least 5 characters'
+		)
+			.isLength({ min: 5 })
+			.isAlphanumeric()
+	],
   authController.postSignup
 );
 

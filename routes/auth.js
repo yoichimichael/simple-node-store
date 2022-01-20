@@ -3,6 +3,7 @@ const { check, body } = require('express-validator');
 const { isValidObjectId } = require('mongoose');
 
 const authController = require('../controllers/auth');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -19,11 +20,13 @@ router.post(
     	.isEmail()
     	.withMessage('Please enter a valid email.')
 			.custom(( value, { req } ) => {
-			if (value === 'test@test.com') {
-				throw new Error('This email address is forbidden')
-			}
-			return true;
-			}), 
+				return User.findOne({ email: value })
+					.then(userDoc => {
+						if (userDoc) {
+							return Promise.reject('E-mail already used, please pick a new one');
+						}
+					}) 
+			}),
 		body(
 			'password',
 			'Please enter password using only numbers and text with at least 5 characters'

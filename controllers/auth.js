@@ -60,7 +60,7 @@ exports.postLogin = (req, res, next) => {
 }
 
 exports.postSignup = (req, res, next) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password } = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
@@ -71,40 +71,30 @@ exports.postSignup = (req, res, next) => {
     });
   }
 
-  User.findOne({ email })
-    .then(userDoc => {
-      if (userDoc) {
-        req.flash('error', 'E-mail already used, please pick a new one');
-        return res.redirect('/signup');
-      }
-
-      return bcrypt
-        .hash(password, 12)
-        .then(hashedPassword => {
-          const user = new User({
-            email,
-            password: hashedPassword,
-            cart: { items: [] } 
-          });
-          return user.save();
+  bcrypt
+    .hash(password, 12)
+    .then(hashedPassword => {
+      const user = new User({
+        email,
+        password: hashedPassword,
+        cart: { items: [] } 
+      });
+      return user.save();
+    })
+    .then(result => {
+      res.redirect('/login');
+      return sgMail
+        .send({
+          to: email,
+          from: 'ynagano@pm.me',
+          subject: 'Signup Succeeded!',
+          html: '<h1>You successfully signed up!</h1>'
         })
-        .then(result => {
-          res.redirect('/login');
-          return sgMail
-            .send({
-              to: email,
-              from: 'ynagano@pm.me',
-              subject: 'Signup Succeeded!',
-              html: '<h1>You successfully signed up!</h1>'
-            })
-            .then(() => {
-              console.log('email sent');
-            })
+        .then(() => {
+          console.log('email sent');
         })
-        .catch(console.log);
     })
     .catch(console.log);
-
 };
 
 exports.postLogout = (req, res, next) => {

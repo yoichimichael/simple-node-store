@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const { validationResult } = require('express-validator');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', { 
@@ -17,6 +18,16 @@ exports.postAddProduct = (req, res, next) => {
     description,
     userId: req.user // with relations setup, mongoose will only assign id, not full object
   });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).render('admin/edit-product', { 
+      pageTitle: 'Add Product', 
+      path: '/admin/edit-product',
+      editing: editMode,
+      product,
+    });
+  }
+
   product 
     .save()
     .then(result => {

@@ -17,15 +17,26 @@ router.get('/products', isAuth, adminController.getProducts);
 router.post(
   '/add-product', 
   [
-    body('title')
+    body(
+      'title',
+      'Title may only contain letters and numbers and must be at least 3 characters long')
       .isAlphanumeric()
       .isLength({ min: 3 })
       .trim(),
-    body('imageUrl')
+    body(
+      'imageUrl',
+      'URL must be valid'
+    )
       .isURL(),
-    body('price')
+    body(
+      'price',
+      'Price must include cents value'
+    )
       .isFloat(),
-    body('decription')
+    body(
+      'description', 
+      'Description of minimum length of 3 characters and maximum length of 400 characters required'
+    )
       .isLength({ min: 5, max: 400 })
       .trim(),
   ],
@@ -37,15 +48,26 @@ router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 router.post(
   '/edit-product', 
   [
-    body('title')
+    body(
+      'title',
+      'Title may only contain letters and numbers and must be at least 3 characters long')
       .isAlphanumeric()
       .isLength({ min: 3 })
       .trim(),
-    body('imageUrl')
+    body(
+      'imageUrl',
+      'URL must be valid'
+    )
       .isURL(),
-    body('price')
+    body(
+      'price',
+      'Price must include cents value'
+    )
       .isFloat(),
-    body('decription')
+    body(
+      'description', 
+      'Description of minimum length of 3 characters and maximum length of 400 characters required'
+    )
       .isLength({ min: 5, max: 400 })
       .trim(),
   ],

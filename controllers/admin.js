@@ -7,7 +7,8 @@ exports.getAddProduct = (req, res, next) => {
     path: '/admin/add-product',
     editing: false,
     hasError: false,
-    errorMessage: null
+    errorMessage: null,
+    validationErrors: []
   });
 }
 
@@ -21,6 +22,7 @@ exports.postAddProduct = (req, res, next) => {
     userId: req.user // with relations setup, mongoose will only assign id, not full object
   });
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(422).render('admin/edit-product', { 
       pageTitle: 'Add Product', 
@@ -33,7 +35,8 @@ exports.postAddProduct = (req, res, next) => {
         price,
         description,
       },
-      errorMessage: errors.array()[0].msg
+      errorMessage: errors.array()[0].msg,
+      validationErrors: errors.array()
     });
   }
 
@@ -63,7 +66,8 @@ exports.getEditProduct = (req, res, next) => {
         editing: editMode,
         hasError: false,
         product,
-        errorMessage: null
+        errorMessage: null,
+        validationErrors: []
       });
     })
     .catch(console.log);
@@ -87,7 +91,8 @@ exports.postEditProduct = (req, res, next) => {
         price,
         description,
       },
-      errorMessage: errors.array()[0].msg
+      errorMessage: errors.array()[0].msg,
+      validationErrors: errors.array()
     });
   }
 

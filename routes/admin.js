@@ -35,7 +35,7 @@ router.post(
       .isFloat(),
     body(
       'description', 
-      'Description of minimum length of 3 characters and maximum length of 400 characters required'
+      'Description of minimum length of 5 characters and maximum length of 400 characters required'
     )
       .isLength({ min: 5, max: 400 })
       .trim(),

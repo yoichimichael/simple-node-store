@@ -20,7 +20,7 @@ router.post(
     body(
       'title',
       'Title may only contain letters and numbers and must be at least 3 characters long')
-      .isAlphanumeric()
+      .isString()
       .isLength({ min: 3 })
       .trim(),
     body(
@@ -51,7 +51,7 @@ router.post(
     body(
       'title',
       'Title may only contain letters and numbers and must be at least 3 characters long')
-      .isAlphanumeric()
+      .isString()
       .isLength({ min: 3 })
       .trim(),
     body(

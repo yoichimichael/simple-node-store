@@ -22,7 +22,7 @@ exports.postAddProduct = (req, res, next) => {
   });
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(422).render('admin/edit-product', { 
+    return res.status(422).render('admin/edit-product', { 
       pageTitle: 'Add Product', 
       path: '/admin/edit-product',
       editing: false,

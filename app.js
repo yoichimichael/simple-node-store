@@ -79,7 +79,9 @@ app.use(authRoutes);
 // ERROR HANDLERS
 app.get('/500', errorsController.get500);
 app.use(errorsController.getPageNotFound);
-
+app.use((error, req, res, next) => {
+  res.redirect('/500');
+});
 
 mongoose
   .connect(MONGODB_URI)

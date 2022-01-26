@@ -76,8 +76,10 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 app.use(authRoutes);
 
-// ERROR HANDLER
+// ERROR HANDLERS
+app.get('/500', errorsController.get500);
 app.use(errorsController.getPageNotFound);
+
 
 mongoose
   .connect(MONGODB_URI)

@@ -78,8 +78,11 @@ app.use(authRoutes);
 
 // ERROR HANDLERS
 app.get('/500', errorsController.get500);
+// catch-all error handler
 app.use(errorsController.getPageNotFound);
+// gets executed when a next() call within a middleware function gets passed an error object 
 app.use((error, req, res, next) => {
+  // res.status(error.httpStatusCode).render(...);
   res.redirect('/500');
 });
 

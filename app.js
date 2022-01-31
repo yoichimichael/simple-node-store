@@ -68,7 +68,6 @@ app.use((req, res, next) => {
       next();
     })
     .catch(err => {
-      // errors within async must be passed to next() to be passed to error handling middleware
       next(new Error(err));
     });
 })
@@ -83,8 +82,6 @@ app.get('/500', errorsController.get500);
 app.use(errorsController.getPageNotFound);
 // gets executed when a next() call within a middleware function gets passed an error object 
 app.use((error, req, res, next) => {
-  // res.status(error.httpStatusCode).render(...);
-  // res.redirect('/500');
   res.status(500).render('500', { 
     pageTitle: 'Error!', 
     path: '/500',

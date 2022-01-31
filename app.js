@@ -68,6 +68,7 @@ app.use((req, res, next) => {
       next();
     })
     .catch(err => {
+      // errors within async must be passed to next() to be passed to error handling middleware
       next(new Error(err));
     });
 })

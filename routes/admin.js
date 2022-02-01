@@ -50,11 +50,6 @@ router.post(
       .isLength({ min: 3 })
       .trim(),
     body(
-      'imageUrl',
-      'URL must be valid'
-    )
-      .isURL(),
-    body(
       'price',
       'Price must include cents value'
     )

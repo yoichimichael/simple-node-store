@@ -102,7 +102,8 @@ exports.getEditProduct = (req, res, next) => {
 
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  const { title, price, imageUrl, description } = req.body;  
+  const { title, price, description } = req.body;  
+  const image = req.file;
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -114,7 +115,6 @@ exports.postEditProduct = (req, res, next) => {
       product: {
         _id: prodId,
         title,
-        imageUrl,
         price,
         description,
       },
@@ -130,7 +130,9 @@ exports.postEditProduct = (req, res, next) => {
       }
       product.title = title;
       product.price = price;
-      product.imageUrl = imageUrl;
+      if (image) {
+        product.imageUrl = image.path;
+      }
       product.description = description;
       return product
         .save()

@@ -59,6 +59,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 // session middleware with options
 app.use(
   session({ 

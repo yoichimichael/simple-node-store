@@ -15,7 +15,24 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const { title, price, description } = req.body;
   const image = req.file;
-  console.log(image);
+  console.log(image)
+  if (!image) {
+    return res.status(422).render('admin/edit-product', { 
+      pageTitle: 'Add Product', 
+      path: '/admin/add-product',
+      editing: false,
+      hasError: true,
+      product: {
+        title,
+        price,
+        description,
+      },
+      errorMessage: 'Attached file is of an incorrect format',
+      validationErrors: []
+    });
+  }
+
+  const errors = validationResult(req);
   const product = new Product({
     title, 
     price, 
@@ -23,8 +40,7 @@ exports.postAddProduct = (req, res, next) => {
     description,
     userId: req.user // with relations setup, mongoose will only assign id, not full object
   });
-  const errors = validationResult(req);
-
+  
   if (!errors.isEmpty()) {
     return res.status(422).render('admin/edit-product', { 
       pageTitle: 'Add Product', 
@@ -33,7 +49,6 @@ exports.postAddProduct = (req, res, next) => {
       hasError: true,
       product: {
         title,
-        imageUrl,
         price,
         description,
       },

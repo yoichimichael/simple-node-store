@@ -73,7 +73,6 @@ exports.postLogin = (req, res, next) => {
           if (areMatching) {
             req.session.user = user;
             req.session.isLoggedIn = true;
-
             // wrapping the redirect within save() ensures the session has been set in the db BEFORE the redirect occurs
             return req.session.save(err => {
               console.log(err);

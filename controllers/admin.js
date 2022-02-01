@@ -32,11 +32,13 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
+  const imageUrl = image.path; // path to 
+  console.log("the image is located here: ", imageUrl);
   const errors = validationResult(req);
   const product = new Product({
     title, 
     price, 
-    image, 
+    imageUrl, 
     description,
     userId: req.user // with relations setup, mongoose will only assign id, not full object
   });

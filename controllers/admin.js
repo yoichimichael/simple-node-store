@@ -1,6 +1,5 @@
 const Product = require('../models/product');
 const { validationResult } = require('express-validator');
-// const mongoose = require('mongoose');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', { 
@@ -14,12 +13,13 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = (req, res, next) => {
-  const { title, price, image, description } = req.body;
-  const product = new Product({ 
-    // _id: new mongoose.Types.ObjectId("61ba57179d628fbe318efc66"),
+  const { title, price, description } = req.body;
+  const image = req.file;
+  console.log(image);
+  const product = new Product({
     title, 
     price, 
-    imageUrl, 
+    image, 
     description,
     userId: req.user // with relations setup, mongoose will only assign id, not full object
   });

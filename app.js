@@ -7,6 +7,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
 const errorsController = require('./controllers/errors');
@@ -33,6 +34,7 @@ const authRoutes = require('./routes/auth');
 // parses ALL incoming request bodies
 // automatically calls next()
 app.use(express.urlencoded({extended: false}));
+app.use(multer({ dest: 'images' }).single('image'));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 // session middleware with options

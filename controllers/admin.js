@@ -19,7 +19,6 @@ exports.getAddProduct = (req, res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const { title, price, description } = req.body;
   const image = req.file;
-  console.log(image)
   if (!image) {
     return res.status(422).render('admin/edit-product', { 
       pageTitle: 'Add Product', 
@@ -36,8 +35,7 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
 
-  const imageUrl = image.path; // path to 
-  console.log("the image is located here: ", imageUrl);
+  const imageUrl = image.path; // path to where image is located
   const errors = validationResult(req);
   const product = new Product({
     title, 

@@ -48,8 +48,8 @@ exports.getIndex = (req, res, next) => {
 
   Product
     .find()
-    .countDocuments(),
-    then(numOfProducts => {
+    .countDocuments()
+    .then(numOfProducts => {
       totalItems = numOfProducts;
       return Product
         .find()

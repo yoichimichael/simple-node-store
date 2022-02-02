@@ -56,11 +56,7 @@ const authRoutes = require('./routes/auth');
 // parses ALL incoming request bodies
 // automatically calls next()
 app.use(express.urlencoded({ extended: false }));
-app.use(multer({ 
-  dest: 'images', 
-  storage: fileStorage, 
-  fileFilter 
-}).single('image'));
+app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 // instructs where to look for static files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));

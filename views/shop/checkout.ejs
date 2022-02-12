@@ -16,5 +16,13 @@
       <div class="centered">
         <h2>Total: <%= totalSum %></h2>
       </div>
+      <div class="centered">
+        <button id="order-btn" class="btn">Order</button>
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="">
+          var stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+          var orderBtn = document.getElementById('order-btn');
+        </script>
+      </div>
 		</main>
 		<%- include('../includes/end.ejs') %>

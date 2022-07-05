@@ -10,6 +10,7 @@ const flash = require('connect-flash');
 const multer = require('multer');
 
 const mongoDbPass = process.env.MONGO_DB_PASS;
+const serverPortNumber = process.env.PORT;
 const errorsController = require('./controllers/errors');
 const User = require('./models/user');
 
@@ -116,6 +117,6 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    app.listen(3000);
+    app.listen(serverPortNumber);
   })
   .catch(console.log);

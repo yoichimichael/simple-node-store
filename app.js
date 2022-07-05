@@ -9,12 +9,11 @@ const csurf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
 
-const mongoDbPass = process.env.MONGO_DB_PASS;
-const serverPortNumber = process.env.PORT;
+const { MONGODB_PASS, MONGODB_USER, MONGODB_DB_NAME, PORT } = process.env;
 const errorsController = require('./controllers/errors');
 const User = require('./models/user');
 
-const MONGODB_URI = `mongodb+srv://yoichi:${mongoDbPass}@cluster0.38pbq.mongodb.net/simple_node_store?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${MONGODB_USER}:${MONGODB_PASS}@cluster0.38pbq.mongodb.net/${MONGODB_DB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 const store = new MongoDBStore({
@@ -117,6 +116,6 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    app.listen(serverPortNumber);
+    app.listen(PORT || 3000);
   })
   .catch(console.log);

@@ -1,0 +1,9 @@
+{
+  "env": {
+    "MONGODB_USER": "yoichi",
+    "MONGODB_PASS": "24dER-09Pwe3RF",
+    "MONGODB_DB_NAME": "simple_node_store",
+    "SENDGRID_KEY": "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",
+    "STRIPE_PRIVATE_KEY": "sk_test_51KQRkRJ3PQTQjWQqDWHQCvZOx6YeJRRs71aAnQ9R4kwNZKtlUrc1RFwyQbE0d2U9YHSWrcPfcVF1nSE84M8LQ5E700733UTQrQ"
+  }
+}

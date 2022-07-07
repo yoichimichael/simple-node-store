@@ -7,6 +7,8 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const { MONGODB_PASS, MONGODB_USER, MONGODB_DB_NAME, PORT } = process.env;
 const errorsController = require('./controllers/errors');
@@ -49,6 +51,9 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const authRoutes = require('./routes/auth');
+
+app.use(helmet());
+app.use(compression());
 
 // parses ALL incoming request bodies
 // automatically calls next()

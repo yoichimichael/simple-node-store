@@ -3,3 +3,5 @@ node_modules/
 .env
 nodemon.json
 access.log
+server.cert
+server.key

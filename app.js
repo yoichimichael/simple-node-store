@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
@@ -13,7 +14,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 
-const { MONGODB_PASS, MONGODB_USER, MONGODB_DB_NAME, PORT } = process.env;
+const { MONGODB_USER, MONGODB_PASS, MONGODB_DB_NAME, PORT } = process.env;
 const errorsController = require('./controllers/errors');
 const User = require('./models/user');
 
@@ -132,6 +133,7 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
+    // app.listen(PORT || 3000);
     https
       .createServer({ key: privateKey, cert: certificate }, app)
       .listen(PORT || 3000);

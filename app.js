@@ -133,9 +133,9 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
-    // app.listen(PORT || 3000);
-    https
-      .createServer({ key: privateKey, cert: certificate }, app)
-      .listen(PORT || 3000);
+    app.listen(PORT || 3000);
+    // https
+    //   .createServer({ key: privateKey, cert: certificate }, app)
+    //   .listen(PORT || 3000);
   })
   .catch(console.log);
